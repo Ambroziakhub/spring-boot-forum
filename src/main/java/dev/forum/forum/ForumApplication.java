@@ -7,6 +7,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.Instant;
 
@@ -19,14 +20,14 @@ public class ForumApplication {
 
 
     @Bean
-    CommandLineRunner commandLineRunner(UserRepo userRepo) {
+    CommandLineRunner commandLineRunner(UserRepo userRepo, PasswordEncoder passwordEncoder) {
 
 
         return args -> {
             User user1 = new User(
                     null,
                     "janek",
-                    "password",
+                    passwordEncoder.encode("password"),
                     "jan.kowalski@email.com",
                     Instant.now(),
                     Boolean.FALSE,
