@@ -1,8 +1,8 @@
 package dev.forum.forum.service;
 
 import dev.forum.forum.exception.ForumException;
-import dev.forum.forum.model.SecurityUser;
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.SecurityUser;
+import dev.forum.forum.model.user.User;
 import dev.forum.forum.repository.UserRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

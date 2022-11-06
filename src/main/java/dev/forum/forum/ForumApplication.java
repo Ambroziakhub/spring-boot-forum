@@ -1,7 +1,7 @@
 package dev.forum.forum;
 
-import dev.forum.forum.enumeration.UserRole;
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.UserRole;
+import dev.forum.forum.model.user.User;
 import dev.forum.forum.repository.UserRepo;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

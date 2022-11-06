@@ -1,6 +1,6 @@
 package dev.forum.forum.controller;
 
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.User;
 import dev.forum.forum.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;

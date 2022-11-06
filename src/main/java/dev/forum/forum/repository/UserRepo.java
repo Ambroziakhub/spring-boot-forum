@@ -1,6 +1,6 @@
 package dev.forum.forum.repository;
 
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

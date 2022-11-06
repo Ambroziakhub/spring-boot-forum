@@ -1,5 +1,6 @@
 package dev.forum.forum.model;
 
+import dev.forum.forum.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

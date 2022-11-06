@@ -1,4 +1,4 @@
-package dev.forum.forum.enumeration;
+package dev.forum.forum.model.user;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 

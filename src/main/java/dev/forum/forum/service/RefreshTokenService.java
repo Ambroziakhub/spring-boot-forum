@@ -2,7 +2,7 @@ package dev.forum.forum.service;
 
 import dev.forum.forum.exception.ForumException;
 import dev.forum.forum.model.RefreshToken;
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.User;
 import dev.forum.forum.repository.RefreshTokenRepo;
 import dev.forum.forum.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Value;

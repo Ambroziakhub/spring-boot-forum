@@ -1,5 +1,6 @@
 package dev.forum.forum.model;
 
+import dev.forum.forum.model.user.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ public class ConfirmationToken {
 
     private String token;
 
-    @OneToOne(fetch = LAZY)
+    @OneToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
 
     private Instant expiryDate;

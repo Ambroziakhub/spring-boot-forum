@@ -1,6 +1,5 @@
-package dev.forum.forum.model;
+package dev.forum.forum.model.user;
 
-import dev.forum.forum.enumeration.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

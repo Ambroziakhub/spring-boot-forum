@@ -1,6 +1,6 @@
 package dev.forum.forum.service;
 
-import dev.forum.forum.model.User;
+import dev.forum.forum.model.user.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
