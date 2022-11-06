@@ -1,6 +1,6 @@
 package dev.forum.forum.service;
 
-import dev.forum.forum.exception.UserNotFoundException;
+import dev.forum.forum.exception.ForumException;
 import dev.forum.forum.model.SecurityUser;
 import dev.forum.forum.model.User;
 import dev.forum.forum.repository.UserRepo;
@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = userRepo.findByUsername(username)
-                .orElseThrow(() -> new UserNotFoundException("User not found in the database: " + username));
+                .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found in the database."));
         log.info("User found in the database: {}", username);
         return new SecurityUser(user);
     }
@@ -32,7 +32,7 @@ public class UserService implements UserDetailsService {
     public User get(Long id) {
         log.info("Fetching user by id {}", id);
         return userRepo.findById(id)
-                .orElseThrow(() -> new UserNotFoundException("User with id " + id + " not found."));
+                .orElseThrow(() -> new ForumException("User with id " + id + " not found."));
     }
 
 }
