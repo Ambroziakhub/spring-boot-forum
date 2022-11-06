@@ -15,6 +15,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -49,9 +50,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
-                .csrf(csrf -> csrf.disable())
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeRequests(auth -> auth
-                        .anyRequest().permitAll()
+                        .antMatchers("/api/auth/login", "/api/auth/register").anonymous()
+                        .antMatchers("/api/auth/logout").authenticated()
+                        .antMatchers("/api/auth/**").permitAll()
+                        .anyRequest().authenticated()
                 )
                 .userDetailsService(userService)
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
