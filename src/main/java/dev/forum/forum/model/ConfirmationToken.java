@@ -9,8 +9,6 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.Instant;
 
-import static javax.persistence.FetchType.LAZY;
-
 @Getter
 @Setter
 @AllArgsConstructor

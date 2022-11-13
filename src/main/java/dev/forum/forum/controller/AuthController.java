@@ -1,15 +1,17 @@
 package dev.forum.forum.controller;
 
-import dev.forum.forum.dto.*;
+import dev.forum.forum.dto.AuthenticationResponse;
+import dev.forum.forum.dto.LoginRequest;
+import dev.forum.forum.dto.RefreshTokenRequest;
+import dev.forum.forum.dto.RegisterRequest;
 import dev.forum.forum.service.AuthService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.HttpStatus.CREATED;
 
 @Slf4j
 @AllArgsConstructor
@@ -20,29 +22,30 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/login")
-    public ResponseEntity<AuthenticationResponse> login(@RequestBody LoginRequest loginRequest) {
-        return new ResponseEntity<>(authService.login(loginRequest), OK);
+    public AuthenticationResponse login(@RequestBody LoginRequest loginRequest) {
+        return authService.login(loginRequest);
     }
 
     @PostMapping("/register")
+    @ResponseStatus(CREATED)
     public void createNewUserAccount(@RequestBody RegisterRequest registerRequest) {
         authService.signup(registerRequest);
     }
 
     @GetMapping("/confirmation/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+    public String verifyAccount(@PathVariable String token) {
         authService.verifyAccount(token);
-        return new ResponseEntity<>("Account activated successfully", OK);
+        return "Account activated successfully";
     }
 
-    @GetMapping("/refresh/token")
-    public ResponseEntity<RefreshTokenResponse> refreshToken(@RequestBody @Valid RefreshTokenRequest refreshTokenRequest) {
-        return new ResponseEntity<>(authService.refreshToken(refreshTokenRequest), OK);
+    @PostMapping("/refresh/token")
+    public AuthenticationResponse refreshToken(@RequestBody @Valid RefreshTokenRequest refreshTokenRequest) {
+        return authService.refreshToken(refreshTokenRequest);
     }
 
     @PostMapping("/logout")
-    public ResponseEntity<String> logout(@RequestBody @Valid  RefreshTokenRequest refreshTokenRequest) {
+    public String logout(@RequestBody @Valid RefreshTokenRequest refreshTokenRequest) {
         authService.logout(refreshTokenRequest);
-        return ResponseEntity.status(OK).body("Logged out successfully");
+        return "Logged out successfully";
     }
 }

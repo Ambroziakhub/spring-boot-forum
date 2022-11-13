@@ -8,13 +8,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-public class SecurityUser implements UserDetails {
-
-    private final User user;
-
-    public SecurityUser(User user) {
-        this.user = user;
-    }
+public record SecurityUser(User user) implements UserDetails {
 
     @Override
     public String getUsername() {
