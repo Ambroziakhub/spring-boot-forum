@@ -29,7 +29,7 @@ public class UserService implements UserDetailsService {
         return new SecurityUser(user);
     }
 
-    public User get(Long id) {
+    public User getUserById(Long id) {
         log.info("Fetching user by id {}", id);
         return userRepo.findById(id)
                 .orElseThrow(() -> new ForumException("User with id " + id + " not found."));

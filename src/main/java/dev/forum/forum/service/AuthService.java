@@ -1,6 +1,9 @@
 package dev.forum.forum.service;
 
-import dev.forum.forum.dto.*;
+import dev.forum.forum.dto.AuthenticationResponse;
+import dev.forum.forum.dto.LoginRequest;
+import dev.forum.forum.dto.RefreshTokenRequest;
+import dev.forum.forum.dto.RegisterRequest;
 import dev.forum.forum.email.EmailDetails;
 import dev.forum.forum.email.EmailService;
 import dev.forum.forum.exception.ForumException;
@@ -83,10 +86,14 @@ public class AuthService {
         SecurityUser securityUser = (SecurityUser) authentication.getPrincipal();
 
         String username = securityUser.getUsername();
-        String accessToken = tokenService.generateToken(authentication);
+        String accessToken = tokenService.generateToken(securityUser.user());
         RefreshToken refreshToken = refreshTokenService.generateRefreshToken(username);
 
-        return new AuthenticationResponse(accessToken, refreshToken.getToken(), username);
+        return AuthenticationResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken.getToken())
+                .username(username)
+                .build();
     }
 
     public void logout(RefreshTokenRequest refreshTokenRequest) {
@@ -109,9 +116,10 @@ public class AuthService {
         userRepo.save(user);
     }
 
-    public RefreshTokenResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
+    public AuthenticationResponse refreshToken(RefreshTokenRequest refreshTokenRequest) {
         // found refresh token in the database
         RefreshToken refreshToken = refreshTokenService.getRefreshToken(refreshTokenRequest.getRefreshToken());
+
         // check if not expired
         refreshTokenService.verifyExpiration(refreshToken);
         // update refresh token
@@ -119,7 +127,11 @@ public class AuthService {
         // generate new access token
         String accessToken = tokenService.generateToken(refreshToken.getUser());
 
-        return new RefreshTokenResponse(accessToken, newRefreshToken);
+        return AuthenticationResponse.builder()
+                .accessToken(accessToken)
+                .refreshToken(newRefreshToken)
+                .username(refreshToken.getUser().getUsername())
+                .build();
     }
 }
 

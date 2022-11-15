@@ -2,7 +2,6 @@ package dev.forum.forum.service;
 
 import dev.forum.forum.model.user.User;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -34,10 +33,6 @@ public class TokenService {
                 .build();
 
         return this.jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-    }
-
-    public String generateToken(Authentication authentication) {
-        return buildToken(authentication.getName(), authentication.getAuthorities().toString());
     }
 
     public String generateToken(User user) {

@@ -1,14 +1,12 @@
 package dev.forum.forum.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 public class AuthenticationResponse {
     private String accessToken;
     private String refreshToken;
