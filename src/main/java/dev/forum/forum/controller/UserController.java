@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
+@CrossOrigin(origins="*")
 @RequestMapping("/api/users")
 @RequiredArgsConstructor
 @Validated

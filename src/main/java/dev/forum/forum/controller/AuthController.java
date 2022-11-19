@@ -16,6 +16,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 @Slf4j
 @AllArgsConstructor
 @RestController
+@CrossOrigin(origins="*")
 @RequestMapping("/api/auth")
 public class AuthController {
 
@@ -48,4 +49,5 @@ public class AuthController {
         authService.logout(refreshTokenRequest);
         return "Logged out successfully";
     }
+
 }
